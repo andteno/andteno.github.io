@@ -267,15 +267,33 @@
     </div>
 
     <script>
-        function handleAddProduct1() {
-            console.log("Adding product 1");
-            alert("Product 1 selected!");
-        }
+  function handleAddProduct1() {
+      console.log("Adding product 1");
 
-        function handleAddProduct2() {
-            console.log("Adding product 2");
-            alert("Product 2 selected!");
-        }
+      // 🔹 Segment Tracking
+      analytics.track("Button Clicked", {
+          product_name: "Product 1",
+          button_id: "button_1",        // optional: useful for linking with a catalog
+          button_color: "blue",         // optional
+          added_at: new Date().toISOString()
+      });
+
+      alert("Product 1 selected!");
+  }
+
+  function handleAddProduct2() {
+      console.log("Adding product 2");
+
+      // 🔹 Segment Tracking
+      analytics.track("Button Clicked", {
+          product_name: "Product 2",
+          button_id: "button_2",        // optional
+          button_color: "blue",         // optional
+          added_at: new Date().toISOString()
+      });
+
+      alert("Product 2 selected!");
+  }
 
         function handleLogin() {
             const name = document.getElementById('name').value;
