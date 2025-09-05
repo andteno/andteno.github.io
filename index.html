@@ -295,18 +295,33 @@
       alert("Product 2 selected!");
   }
 
-        function handleLogin() {
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            
-            console.log("Login attempt with:", { name, email });
-            
-            if (name && email) {
-                alert(`Welcome ${name}! Login attempt with email: ${email}`);
-            } else {
-                alert("Please fill in both name and email fields.");
-            }
-        }
+function handleLogin() {
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    
+    console.log("Login attempt with:", { name, email });
+
+    if (name && email) {
+        // Identify the user
+        analytics.identify(email, {
+            name: name,
+            email: email
+        });
+
+        // Optional: track login event
+        analytics.track("User Logged In", {
+            name: name,
+            email: email,
+            button_id: "log_in",
+            button_color: "blue",
+            timestamp: new Date().toISOString()
+        });
+
+        alert(`Welcome ${name}! Login attempt with email: ${email}`);
+    } else {
+        alert("Please fill in both name and email fields.");
+    }
+}
     </script>
 </body>
 </html>
